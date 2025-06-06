@@ -1,0 +1,146 @@
+github:::
+https://github.com/Magentakey/turn_based_oop
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+hero akan ada 5, boss hanya 1
+
+kita memilih 5 hero di awal yg tersedia
+
+kita mendapatkan 3 item yg akan secara acak dibagikan ke pada hero
+
+uang tiap hero dipisah dan akan hanya bertambah setiap sesudah turn(sebelum shop) dan uang akan terus bertambah secara aritmetik, 100-200-300,dst...
+
+items maks slot hanya 5, bisa dijual tapi 50% harga, items hanya equip tidak consume, jadi hero tidak memiliki inventori
+
+skills dan special skill milik hero dan boss terpisah
+
+skills ada 3 dan special skill hanya 1
+
+skills dan special skill ada tipenya, seperti heal, atk, stun, dan buff/debuf
+
+skills dan special skill memiliki rarity(common, uncommon, rare, epic, legendary) dan akan diambil random sesuai rarity tersebut, (45%, 25%, 15%, 10%, 5%)
+
+tipe skill ada single target, dan ada multi target
+
+turn selesai setelah semua hero dan boss menyerang
+
+turn hero akan ada pilihan untuk menyerang, menggunakan skills, menggunakan special skills, restore_mp, retreat(dihitung mirip seperti mati)
+
+turn boss akan auto ke 3 pilihan meyerang, menggunakan skills, menggunakan special skills, restore_mp. dengan persentasi 30%,50%,20%, 100%(jika auto ke skill tapi tidak cukup mp).
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ketentuan:::
+class skill dan special skill akan menjadi template yg nanti kita buat skillnya lewat objek dari hero, contoh  SpecialSkill("Berserk", 25, 200, "physical", "epic", "Serangan brutal dengan risiko terkena damage balik.", "single"), divine_light = SpecialSkill("Divine Light", 30, -200, "healing", "legendary", "Menyembuhkan semua sekutu secara besar.", "multi")
+
+class player akan menjadi template untuk hero yg akan dibuat nantinya, dia harus bisa menyerang biasa, memakai skills dan special skill, mengembalikan mana dan kabur(dihitung mati)
+
+class enemy akan menjadi template untuk boss yg akan dibuat nanti beserta skill dan special skill, mirip seperti hero
+
+class item akan menjadi template untuk item yg akan kita buat dan berikan kepada hero , item ini akan menambahkan stat kita atau mengurangi, mirip seperti skill?
+
+class shop akan menjadi sistem yg akan dilalu pada fase sebelum menyerang, akan ada items pool yg berisi semua item kita dan bisa dijual, akan ada sistem stock(10) yg terefresh tiap turnnya, sistem untuk melakukan pembelian
+
+class game manager akan menjadi sistem game kita, 
+
+dengan flow:::
+1.inisialisasi skills & special skill, dan item
+2.inisialisasi hero & boss
+3.memilih 5 hero dari yg semua hero yg ada
+4.membagikan 3 items gratis diawal untuk hero yg beruntung
+5.battle turn, tambah turn number setelah selesai
+
+loop tiap turn setelah turn 1:::
+1.give income
+2.shop phase
+3.check game over
+4.battle run
+5.turn number ++
+##balik ke-1
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+👤 Orang 1, rafa – Core Character Logic (Base Class & Player/Enemy Behavior)
+File/Fungsi:
+-Character (base)
+-Player (hero class)
+-Enemy (boss class)
+
+Tugas:
+-Implementasi metode:
+--take_damage
+--restore_mp
+--is_alive
+--Player.attack, Player.use_skill, Player.use_special_skill, Player.equip_item, Player.sell_item
+--Enemy.choose_action
+-Mekanisme HP/MP, status hidup/mati, dan interaksi dasar antar karakter.
+
+👤 Orang 2, juan – Skills & Special Skills
+File/Fungsi:
+-Skill
+-SpecialSkill
+
+Tugas:
+-Implementasi metode use untuk Skill dan SpecialSkill
+-Efek skill terhadap target (damage, heal, buff, debuff)
+-Pastikan efek bekerja berdasarkan MP, target, dan deskripsi skill
+-passtikan skill bekerja untuk single target dan multi target
+
+👤 Orang 3, ariq – Item & Equipment System
+File/Fungsi:
+-Item
+-Player.equipped_items
+-equip_item, sell_item
+
+Tugas:
+-Implementasi Item.apply_to(player)
+-Mekanisme pengaruh item ke stat player (atk, def, hp, mp)
+-Batas maksimum 5 item
+-Jual beli item (terkait harga, penghapusan dari list)
+
+👤 Orang 4, jaydan – Shop System
+File/Fungsi:
+-Shop
+-Shop.refresh_stock, display_items, buy
+-GameManager.shop_phase
+
+Tugas:
+-Implementasi sistem toko:
+--Refresh stok secara acak dari item_pool
+--Display item ke pemain
+--Proses pembelian item (cek gold, kurangi gold, tambahkan item)
+-Interaksi dengan player di fase belanja
+
+👤 Orang 5, ramdan – GameManager & Battle System
+File/Fungsi:
+-GameManager
+-Fungsi utama game loop:
+--start_game, run_battle_turn, give_income, check_game_over, display_team_status
+
+Tugas:
+-Jalankan alur permainan per turn
+-Implementasi logika battle:
+--Giliran player dan boss
+--Pemilihan skill, attack, atau kabur
+-Cek kondisi game over
+-Display status tim tiap turn
+
+👤 Orang 6, gilang – Setup & Integrasi (Init, Hero/Boss Creation, Setup Phase)
+File/Fungsi:
+-GameManager.init_skills_and_items
+-GameManager.create_heroes_and_bosses
+-GameManager.choose_heroes
+-GameManager.distribute_starting_items
+
+Tugas:
+-Inisialisasi skill, item, boss, dan hero
+-Assign skill dan special skill ke masing-masing hero/boss
+-Sistem pemilihan hero (manual/random)
+-Distribusi item awal secara adil atau acak
+
+
+
