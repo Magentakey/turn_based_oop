@@ -83,7 +83,7 @@ Proyek ini adalah sebuah **game RPG berbasis turn-based** yang dikembangkan meng
 | **Juan**    | `Skill`, `SpecialSkill` (penggunaan skill, efek, target area)         |
 | **Ariq**    | `Item`, `equip_item`, `sell_item` (sistem equip item dan stat)        |
 | **Jaydan**  | `Shop`, `refresh_stock`, `buy` (toko dan sistem transaksi)            |
-| **Ramdan**  | `GameManager` (`run_battle_turn`, `give_income`, `check_game_over`)  |
+| **Ramdan**  | `GameManager` (`run_battle_turn`, `give_income`, `check_game_over`, `display_team_status`)  |
 | **Gilang**  | Setup awal: `init_skills_and_items`, `create_heroes_and_bosses`, `choose_heroes`, `distribute_starting_items` |
 
 ---
@@ -96,4 +96,5 @@ Proyek ini adalah sebuah **game RPG berbasis turn-based** yang dikembangkan meng
    git clone https://github.com/USERNAME/turn_based_oop.git
    cd turn_based_oop
 3. Jalankan game:
+   ```bash
    python main.py
