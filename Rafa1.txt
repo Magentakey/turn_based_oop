@@ -1,0 +1,119 @@
+//charakter.py
+class Character:
+    def __init__(self, name, max_hp, attack, defense, max_mp):
+        self.name = name
+        self.max_hp = max_hp
+        self.hp = max_hp
+        self.attack = attack
+        self.defense = defense
+        self.max_mp = max_mp
+        self.mp = max_mp
+        self.is_alive = True
+
+    def take_damage(self, damage):
+        actual_damage = max(0, damage - self.defense)
+        self.hp -= actual_damage
+        print(f"{self.name} menerima {actual_damage} damage!")
+        if self.hp <= 0:
+            self.hp = 0
+            self.is_alive = False
+            print(f"{self.name} telah kalah!")
+
+    def restore_mp(self, amount=20):
+        self.mp = min(self.max_mp, self.mp + amount)
+        print(f"{self.name} memulihkan MP sebesar {amount}. MP sekarang: {self.mp}")
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//player.py
+from Character import Character
+
+class Player(Character):
+    def __init__(self, name, max_hp, attack, defense, max_mp, gold=0):
+        super().__init__(name, max_hp, attack, defense, max_mp)
+        self.skills = []             # List of Skill objects
+        self.special_skill = None    # One SpecialSkill
+        self.equipped_items = []     # Max 5 items
+        self.gold = gold
+
+    def attack_target(self, target):
+        print(f"{self.name} menyerang {target.name}!")
+        target.take_damage(self.attack)
+
+    def use_skill(self, skill, target):
+        if self.mp < skill.mp_cost:
+            print(f"{self.name} tidak cukup MP untuk skill {skill.name}!")
+            return
+        self.mp -= skill.mp_cost
+        skill.use(self, target)
+
+    def use_special_skill(self, target_list):
+        if not self.special_skill:
+            print(f"{self.name} tidak memiliki special skill.")
+            return
+        if self.mp < self.special_skill.mp_cost:
+            print(f"{self.name} tidak cukup MP untuk special skill!")
+            return
+        self.mp -= self.special_skill.mp_cost
+        self.special_skill.use(self, target_list)
+
+    def equip_item(self, item):
+        if len(self.equipped_items) >= 5:
+            print(f"{self.name} tidak bisa membawa lebih dari 5 item.")
+            return
+        self.equipped_items.append(item)
+        item.apply_to(self)
+        print(f"{self.name} memasang item {item.name}.")
+
+    def sell_item(self, item):
+        if item in self.equipped_items:
+            self.equipped_items.remove(item)
+            refund = item.price // 2
+            self.gold += refund
+            print(f"{self.name} menjual {item.name} dan mendapat {refund} gold.")
+        else:
+            print(f"{self.name} tidak memiliki item itu.")
+
+///////////////////////////////////////////////////////////////////////////////////////
+//enmy.py
+from Character import Character
+import random
+
+class Enemy(Character):
+    def __init__(self, name, max_hp, attack, defense, max_mp):
+        super().__init__(name, max_hp, attack, defense, max_mp)
+        self.skills = []
+        self.special_skill = None
+
+    def choose_action(self, heroes):
+        if self.mp < 10:
+            print(f"{self.name} tidak cukup MP, memulihkan MP.")
+            self.restore_mp()
+            return
+
+        action_choice = random.choices(
+            ['attack', 'skill', 'special'],
+            weights=[30, 50, 20],
+            k=1
+        )[0]
+
+        if action_choice == 'attack':
+            target = random.choice([h for h in heroes if h.is_alive])
+            print(f"{self.name} menyerang {target.name}.")
+            target.take_damage(self.attack)
+
+        elif action_choice == 'skill' and self.skills:
+            skill = random.choice(self.skills)
+            if self.mp >= skill.mp_cost:
+                target = random.choice([h for h in heroes if h.is_alive])
+                self.mp -= skill.mp_cost
+                skill.use(self, target)
+            else:
+                self.restore_mp()
+
+        elif action_choice == 'special' and self.special_skill:
+            if self.mp >= self.special_skill.mp_cost:
+                targets = [h for h in heroes if h.is_alive]
+                self.mp -= self.special_skill.mp_cost
+                self.special_skill.use(self, targets)
+            else:
+                self.restore_mp()
+
