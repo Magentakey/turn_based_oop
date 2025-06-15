@@ -1,9 +1,6 @@
 import random
 
-# ============================== #
-#       ORANG 1 – RAFA           #
 # Character, Player, Enemy Class #
-# ============================== #
 
 class Character:
     def __init__(self, name, max_hp, max_mp, atk, defense):
@@ -122,10 +119,7 @@ class Enemy(Character):
                 print(f"{self.name} menggunakan SPECIAL SKILL {self.special_skill.name}!")
                 self.special_skill.use(self, targets)
 
-# ============================== #
-#       ORANG 2 – JUAN           #
-#        Skill & SpecialSkill    #
-# ============================== #
+#  Skill & SpecialSkill    #
 
 class Skill:
     def __init__(self, name, mp_cost, power, type, rarity, description, target_type):
@@ -186,10 +180,7 @@ def random_special_skill(pool):
         if c:
             return random.choice(c)
 
-# ============================== #
-#       ORANG 3 – ARIQ           #
-#           Item System          #
-# ============================== #
+#  Item System   #
 
 class Item:
     def __init__(self, name, description, stat_modifiers, price):
@@ -208,10 +199,7 @@ class Item:
             if hasattr(player, k):
                 setattr(player, k, getattr(player, k) - v)
 
-# ============================== #
-#       ORANG 4 – JAYDAN         #
-#          Shop System           #
-# ============================== #
+#  Shop System   #
 
 class Shop:
     def __init__(self, item_pool):
@@ -241,10 +229,7 @@ class Shop:
         player.equip_item(itm)
         print(f"{player.name} membeli {itm.name} seharga {itm.price} gold.")
 
-# ============================== #
-#  ORANG 5 & 6 – RAMDAN + GILANG #
-#        GameManager Full       #
-# ============================== #
+#  GameManager Full   #
 
 class GameManager:
     def __init__(self):
