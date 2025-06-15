@@ -240,7 +240,28 @@ class GameManager:
         pass
 
     def shop_phase(self):
-        pass
+        print("\n--- SHOP PHASE ---")
+        self.shop.refresh_stock()
+
+        for player in self.player_team:
+            while True:
+                print(f"\n{player.name} - Gold: {player.gold}")
+                self.shop.display_items()
+                choice = input("Pilih item yang ingin dibeli (1-10, atau 0 untuk skip): ")
+
+                if not choice.isdigit():
+                    print("Input tidak valid.")
+                    continue
+
+                choice = int(choice)
+                if choice == 0:
+                    break
+
+                self.shop.buy(player, choice - 1)
+
+                lanjut = input("Beli item lagi? (y/n): ").lower()
+                if lanjut != 'y':
+                    break
 
     def check_game_over(self):
         pass
