@@ -91,10 +91,14 @@ Proyek ini adalah sebuah **game RPG berbasis turn-based** yang dikembangkan meng
 ## ▶️ Cara Menjalankan
 
 1. Pastikan Python 3.8+ sudah terpasang
+2. install kivy dan kivymd:
+   ```bash
+   pip install kivy[base] kivymd
 2. Clone repository ini:
    ```bash
    git clone https://github.com/USERNAME/turn_based_oop.git
    cd turn_based_oop
+   cd game_turn_based
 3. Jalankan game:
    ```bash
    python main.py
