@@ -1,0 +1,50 @@
+<HeroResultScreen>:
+    name: "hero_result"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "assets/images/bg.png"
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 20
+
+        Label:
+            text: "Your Random Heroes"
+            font_size: 32
+            size_hint_y: None
+            height: 50
+            color: 1, 1, 1, 1
+
+        BoxLayout:
+            orientation: 'vertical' 
+            size_hint: (0.8, 0.7)
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            spacing: 25
+
+            BoxLayout:
+                id: hero_grid1
+                spacing: 25
+                size_hint_y: 0.30
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                # akan diisi dari Python pakai add_widget
+            BoxLayout:
+                id: hero_grid2
+                spacing: 25
+                size_hint_x: 0.66
+                size_hint_y: 0.30
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+                # akan diisi dari Python pakai add_widget
+
+
+        Button:
+            text: "Next"
+            size_hint_y: None
+            height: 50
+            font_size: 20
+            background_color: 0.5, 1, 0.5, 1
+            on_release: root.go_to_item_distribution()

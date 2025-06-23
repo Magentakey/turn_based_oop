@@ -1,0 +1,75 @@
+<ShopScreen>:
+    name: "battle_screen"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "assets/images/bg.png"
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        # SHOP ITEMS: SCROLL HORIZONTAL
+        ScrollView:
+            size_hint_y: 0.3
+            do_scroll_x: True
+            do_scroll_y: False
+            bar_width: 10
+            scroll_type: ['bars', 'content']
+
+            BoxLayout:
+                size_hint_x: None
+                height: self.minimum_height
+                width: self.minimum_width
+                orientation: 'horizontal'
+                spacing: 10
+                padding: 5
+                id: shop_items
+
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: 10
+
+            # HERO LIST DI KIRI
+            ScrollView:
+                size_hint_x: 0.2
+                do_scroll_y: True
+                BoxLayout:
+                    id: hero_list
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: 5
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.8
+                spacing: 10
+
+                Label:
+                    text: "Equipped Items"
+                    size_hint_y: None
+                    height: 30
+                    font_size: 18
+                    bold: True
+
+                # HERO ITEMS: VERTIKAL
+                ScrollView:
+                    do_scroll_y: True
+                    do_scroll_x: False
+                    BoxLayout:
+                        id: hero_items
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: 10
+                        padding: 5
+
+        Button:
+            id: next_shop
+            text: "NEXT"
+            size_hint_y: None
+            height: 40
+            on_release: root.next_shop()

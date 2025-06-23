@@ -1,0 +1,56 @@
+<MainMenuScreen>:
+    name: "main_menu"
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "assets/images/bg.png"
+
+    FloatLayout:
+
+        Label:
+            text: "turn based rpg"
+            font_size: 42
+            bold: True
+            pos_hint: {"center_x": 0.5, "top": 0.95}
+            size_hint: (None, None)
+            color: 1, 1, 1, 1
+
+        BoxLayout:
+            id: change_mode
+            orientation: "vertical"
+            size_hint: (0.25, 0.1)
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+            Button:
+                text: "Play"
+                font_size: 30
+                color: (0,0,0,1)
+                bold: True
+                italic: True
+#                size_hint: (0.25, 0.1)
+#                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                background_normal: ""
+                background_color: (0.82, 0.776, 1, 1)  # warna ungu soft
+                on_release: root.on_play()
+
+        Button:
+            text: "Exit"
+            font_size: 30
+            color: (0,0,0,1)
+            bold: True
+            italic: True
+            size_hint: (0.25, 0.1)
+            pos_hint: {"center_x": 0.5, "center_y": 0.35}
+            background_normal: ""
+            background_color: (1, 0.369, 0.369, 1)  # warna merah muda
+            on_release: root.on_exit()
+
+        Label:
+            text: "made by acumalaka team"
+            font_size: 22
+            bold: True
+            pos_hint: {"center_x": 0.5, "top": 0.25}
+            size_hint: (None, None)
+            color: 1, 1, 1, 1

@@ -1,0 +1,17 @@
+-perbaiki gui:
+--perbaiki kontras warna gelap/cerah agar lebih terbaca, seperti kontras antara background dan font, perbaiki ukuran dan layoutnya
+--perbaiki warna highlight pada battle screen agar gk kotras
+--perbaiki label_info  battle screen, menjadi seperti log battle, menampilkan info turn yg kita buat sudah bagus, tambahkan turn siapa dan buat warnanya berbeda untuk highlight giliran dan tambahkan heigtnya sedikit juga, contoh:
+turn riko: attack 1 ke wolf1
+turn now : joko[warna merah atau semacamnya agar highlight]
+turn joko: attack 5 ke goblin2
+turn now : asep[warna merah atau semacamnya agar highlight]
+...
+
+-perbaiki system:
+--pada battle screen: round ada 5, mobs-mobs-shop-mobs-boss, next round terjadi Ketika semua musuh mati, phase shop hanya terjadi di round 3, mobs ada 2 atau lebih(2-5)
+--pada game manager: tambahkan create mobs, serta skills dan special skills khusus mobs-nya nanti akan, seperti wolf, lizardman, goblin, dll
+-integrasi stats modifier item pada stats hero pemakainya
+-balancing item, skills, hero,dll.
+-hero random skills akan bergantung pada type hero dan type skillsnya, contoh hero archer: skiils type range, blink, dll
+-tambahin sound effect, opsional hehe

@@ -1,0 +1,104 @@
+<BattleScreen>:
+    name: "hero_result"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "assets/images/bg.png"
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 10
+        spacing: 10
+
+        # Turn Info
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: 0.2
+            Label:
+                id: turn_label
+                text: "Turn 1: -"
+                size_hint_y: 0.25
+                font_size: 22
+                bold: True
+                color: 1, 1, 1, 1
+            Label:
+                id: turn_label_
+                markup: True
+                text: "[b][color=00ff00]>> mobs <<[/color][/b] - mobs - shop - mobs - boss"
+                size_hint_y: 0.25
+                font_size: 22
+                bold: True
+                color: 1, 1, 1, 1
+            BoxLayout:
+                orientation: 'vertical'
+                
+                ScrollView:
+                    id: scroll_log_info
+                    size_hint: (1, 0.5)  # Sesuaikan tinggi
+                    bar_width: 10
+                    scroll_type: ['bars', 'content']
+                    do_scroll_x: False
+
+                    Label:
+                        id: turn_info
+                        text: "Log battle akan muncul di sini.\n"  # bisa multiline
+                        size_hint_y: None
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+                        font_size: 20
+                        color: 1, 1, 1, 1
+                        halign: 'center'
+                        valign: 'top'
+                        markup: True
+
+        # Mid Area: Hero and Boss
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 0.4
+            spacing: 15
+
+            # hero area
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint_x: 0.5
+                spacing: 20
+                BoxLayout:
+                    orientation: "vertical"
+                    id: hero_box1
+                    spacing: 10
+                    padding: [5, 5]
+                    size_hint: (1,1)
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    height: self.minimum_height
+                BoxLayout:
+                    orientation: "vertical"
+                    id: hero_box2
+                    spacing: 10
+                    padding: [5, 5]
+                    size_hint: (1,0.66)
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    height: self.minimum_height
+
+            BoxLayout:
+                id: boss_box
+                orientation: "horizontal"
+                spacing: 20
+                size_hint_x: 0.5
+                
+        # Action Panel
+        GridLayout:
+            id: action_panel
+            cols: 5
+            spacing: 5
+            padding: [5, 5]
+            size_hint_y: 0.1
+
+        # Submenu (Skills, Specials)
+        GridLayout:
+            id: submenu_box
+            cols: 4
+            spacing: 5
+            padding: [5, 5]
+            size_hint_y: 0.15

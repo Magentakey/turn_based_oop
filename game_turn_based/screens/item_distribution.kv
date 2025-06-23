@@ -1,0 +1,44 @@
+<ItemDistributionScreen>:
+    name: "item_distribution"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "assets/images/bg.png"
+            
+    BoxLayout:
+        orientation: "vertical"
+        padding: 20
+        spacing: 10
+
+        Label:
+            text: "Item Distribution"
+            font_size: 28
+            size_hint_y: None
+            height: 50
+
+        ScrollView:
+            do_scroll_y: False
+            do_scroll_x: False
+            size_hint: 1, 1
+
+            FloatLayout:
+                GridLayout:
+                    id: item_grid
+                    cols: 1
+                    spacing: 10
+                    padding: 10
+                    size_hint: None, None
+                    size: self.minimum_size
+                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                    row_default_height: 200
+                    row_force_default: True
+                    col_default_width: 300
+                    col_force_default: True
+
+        Button:
+            text: "Continue to Battle"
+            size_hint_y: None
+            height: 50
+            background_color: 0.5, 1, 0.5, 1
+            on_release: root.go_to_battle()
